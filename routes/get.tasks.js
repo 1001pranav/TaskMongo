@@ -2,8 +2,13 @@ import { getAllTasks } from "../database/tasks.js";
 
 export default async function getTasks(req, res) {
     try {
+        if (
+            req.body.task_id &&
+            typeof req.body.task_id === "string"
+        ) {
+            // const data = ;
+        }
         const data = await getAllTasks();
-        console.log(data);
         return await res.send(data);
     } catch (error) {
         console.log("Error getting tasks " + error);

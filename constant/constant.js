@@ -1,11 +1,17 @@
-export const STATUS = {
-    0: 'PAUSED',
-    1: 'ACTIVE',
-    2: 'INPROGRESS'
-};
+export const STATUS = [
+    'PAUSED',
+    'ACTIVE',
+    'INPROGRESS'
+];
 
-export const PRIORITY = {
-    0: 'LOW',
-    1: 'MEDIUM',
-    2: 'HARD'
-};
+export const PRIORITY = [
+    'LOW',
+    'MEDIUM',
+    'HARD'
+];
+
+export const TASK_TYPE = [
+    "MAIN",
+    "SUB",
+    "SUB_MAIN",
+]
