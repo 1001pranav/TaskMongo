@@ -1,4 +1,4 @@
-import { getAllTasks } from "../database/tasks.js";
+import { getAllTasks } from "../../database/tasks.js";
 
 export default async function getTasks(req, res) {
     try {
@@ -9,9 +9,9 @@ export default async function getTasks(req, res) {
             // const data = ;
         }
         const data = await getAllTasks();
-        return await res.send(data);
+        return res.response = { status:200, data };
     } catch (error) {
         console.log("Error getting tasks " + error);
-        return res.send({message: "Something went wrong"});
+        return res.response = { message: "Something went wrong" };
     }
 }
