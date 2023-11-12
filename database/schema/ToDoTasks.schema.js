@@ -27,6 +27,12 @@ const tasksSchema = new Schema({
     Notes: {
         type: String,
         default: ""
+    },
+    Percentage: {
+        type: Number,
+        default: 0,
+        min: [0, 'Minimum 0 should be percentage value'],
+        max: [100, 'Percentage should not exceed 100'],
     }
     }, {
         autoIndex: true,
@@ -37,8 +43,13 @@ const tasksSchema = new Schema({
 const ToDoTasks = new Schema({
     Name: String,
     Steps: [String],
-    Tasks: [tasksSchema]
-})
-const conn = DB_CONNECT();
+    Tasks: [tasksSchema],
+});
+ToDoTasks.virtual('CompletedPercentage').get(function () {
+    let defaultSum = 0;
+    return this.Tasks.reduce((prevSum, currTasks)=> prevSum + currTasks.Percentage, defaultSum);
+});
+
+const conn = await DB_CONNECT();
 
 export default conn.model('ToDoTasks', ToDoTasks);

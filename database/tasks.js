@@ -11,8 +11,9 @@ export async function insertTasks(insertTasks, objectID) {
             Status: insertTasks.status,
             Priority: insertTasks.priority,
             TaskType: insertTasks.task_type,
-            Notes: insertTasks.notes
-        }
+            Notes: insertTasks.notes,
+            Percentage: insertTasks.percentage
+        };
         return await ToDoTask.updateOne({ _id: ObjectId(objectID)}, {
             $push: {
                 Tasks: insertData
@@ -49,7 +50,10 @@ export async function updateTask(todoID, taskID, updateField) {
         }
 
         for (const field of updateField) {
-            updates.$set[`Tasks.$.${Object.keys(field)[0]}`] = Object.values(field)[0];
+            let taskKey = Object.keys(field)[0];
+            taskKey = taskKey[0].toUpperCase() + taskKey.substring(1);
+            const TodoTaskKey = `Tasks.$.${taskKey}`
+            updates.$set[TodoTaskKey] = Object.values(field)[0];
         }
 
         return await ToDoTask.updateMany(
