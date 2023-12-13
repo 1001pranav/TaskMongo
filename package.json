@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "run index.js"
+    "test": "run index.js",
+    "start": "node index.js",
+    "nodemon": "nodemon index.js"
   },
   "author": "Pranav R Nayak N",
   "license": "ISC",
