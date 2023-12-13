@@ -23,7 +23,9 @@ export default function (req, res, next) {
             response.data = res.response.data;
         }
         console.log(JSON.stringify(response));
-        return res.json(response);
+
+        res.status(response.status).json(response);
+        next()
     } catch (error) {
         console.log("error on response helper", error)
         // res.status(response.status);
