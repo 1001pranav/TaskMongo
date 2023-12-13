@@ -1,12 +1,12 @@
 import { insertTasks } from "../../database/tasks.js";
 import { STATUS, PRIORITY } from "../../constant/constant.js";
 
-export default async function insert(req, res) {
+export default async function insert(req, res, next) {
     try {
         const taskData = req.body;
 
         // Title is required
-        if (!"title" in taskData) {
+        if (!("title" in taskData)) {
             return res.response = { message: "REQUIRED_TITLE" };
         }
 
