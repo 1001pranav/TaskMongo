@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 /* Using Middlewares for body parser */
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-
+app.use(bodyParser.raw({ type: 'application/json'}))
 /* Mongo DB connection */
 await DB_CONNECT();
 
@@ -25,7 +25,11 @@ app.use(requestHelper)
 /* API routes */
 app.use(Routes);
 
-console.log("Calling responseHelper middleware");
+app.all("*", async(req, res, next)=> {
+    console.log("API not found");
+    res.response = { message: 'ROUTE_NOT_FOUND' };
+});
+
 /* Middleware for handling response */
 app.use(responseHelper);
 
